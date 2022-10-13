@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System;
+
 namespace OpenXmlPowerToolz
 {
     public class ListItemTextGetter_ru_RU
@@ -32,6 +34,11 @@ namespace OpenXmlPowerToolz
 
         public static string GetListItemText(string languageCultureName, int levelNumber, string numFmt)
         {
+            if (languageCultureName is null)
+            {
+                throw new ArgumentNullException(nameof(languageCultureName));
+            }
+
             if (numFmt == "cardinalText")
             {
                 string result = "";
@@ -40,8 +47,7 @@ namespace OpenXmlPowerToolz
                 if (t1 >= 1)
                     result += OneThroughNineteen[t1 - 1] + " thousand";
                 if (t1 >= 1 && t2 == 0)
-                    return result.Substring(0, 1).ToUpper() +
-                        result.Substring(1);
+                    return string.Concat(result[..1].ToUpper(), result.AsSpan(1));
                 if (t1 >= 1)
                     result += " ";
                 int h1 = (levelNumber % 1000) / 100;
@@ -64,8 +70,8 @@ namespace OpenXmlPowerToolz
                     if (r >= 1)
                         result += "-" + OneThroughNineteen[r - 1];
                 }
-                return result.Substring(0, 1).ToUpper() +
-                    result.Substring(1);
+                return result[..1].ToUpper() +
+                    result[1..];
             }
             if (numFmt == "ordinalText")
             {
@@ -77,8 +83,7 @@ namespace OpenXmlPowerToolz
                 if (t1 >= 1 && t2 == 0)
                 {
                     result += OneThroughNineteen[t1 - 1] + " thousandth";
-                    return result.Substring(0, 1).ToUpper() +
-                        result.Substring(1);
+                    return string.Concat(result[..1].ToUpper(), result.AsSpan(1));
                 }
                 if (t1 >= 1)
                     result += " ";
@@ -89,8 +94,7 @@ namespace OpenXmlPowerToolz
                 if (h1 >= 1 && h2 == 0)
                 {
                     result += OneThroughNineteen[h1 - 1] + " hundredth";
-                    return result.Substring(0, 1).ToUpper() +
-                        result.Substring(1);
+                    return string.Concat(result[..1].ToUpper(), result.AsSpan(1));
                 }
                 if (h1 >= 1)
                     result += " ";
@@ -108,8 +112,7 @@ namespace OpenXmlPowerToolz
                     if (r >= 1)
                         result += " " + OrdinalOneThroughNineteen[r - 1];
                 }
-                return result.Substring(0, 1).ToUpper() +
-                    result.Substring(1);
+                return string.Concat(result[..1].ToUpper(), result.AsSpan(1));
             }
             return null;
         }
