@@ -1,5 +1,5 @@
 // paths to tools
-val nuget = "C:\\TeamCity\\buildAgent\\tools\\NuGet.CommandLine.6.3.1"
+val nuget = "C:\\TeamCity\\buildAgent\\tools\\NuGet.CommandLine.6.3.1\\tools\\NuGet.exe"
 val msbuild = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\MsBuild.exe"
 
 job("Build and test") {

@@ -11,7 +11,7 @@ job("Build and test") {
             // To escape spaces in command line, we use quotes e.g. "$msbuild"
             content = """
                 "$nuget" restore
-                "$msbuild" netframework-sample.sln
+                "$msbuild" OpenXmlPowerToolz.sln
             """
         }
 
